@@ -1,0 +1,15 @@
+def insertAfter(self, prev_node, new_data):
+  
+   
+    if prev_node is None:
+        print("The given previous node must inLinkedList.")
+        return
+  
+   
+    new_node = Node(new_data)
+  
+  
+    new_node.next = prev_node.next
+  
+   
+    prev_node.next = new_node
