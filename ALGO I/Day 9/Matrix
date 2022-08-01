@@ -1,0 +1,24 @@
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        m = len(mat)
+        n = len(mat[0])
+		# set up active list of cells 
+        ijs = {(i,j) for i in range(m) for j in range(n) if mat[i][j] > 0}
+        k = 1
+        while len(ijs) > 0:
+            removes = set()
+            for i,j in ijs:
+			# check 4 neighbors, if all large enough, increase self value  
+                if mat[max(0,i-1)][j] >= k:
+                    if mat[min(m-1,i+1)][j] >= k:
+                        if mat[i][max(0,j-1)] >= k:
+                            if mat[i][min(n-1,j+1)] >= k:
+                                mat[i][j] = k + 1
+                                continue
+                
+				# if one of the neighbors was smaller, this cell deactivates 
+                removes.add((i,j))
+			# remove any cells slated for removal
+            ijs.difference_update(removes)   
+            k += 1
+        return mat
