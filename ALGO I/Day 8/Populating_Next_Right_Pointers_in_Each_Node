@@ -1,0 +1,23 @@
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root:
+            return root
+        
+        queue=[]
+        queue.append(root)
+        
+        while queue:
+            temp=[]
+            while queue:
+                cur_node=queue.pop(0)
+                if cur_node.left:
+                    temp.append(cur_node.left)
+                if cur_node.right:
+                    temp.append(cur_node.right)
+            for i in range(len(temp)-1):
+                temp[i].next=temp[i+1]
+            queue.extend(temp)
+        
+        return root
+        
+        print(queue)
